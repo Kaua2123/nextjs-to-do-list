@@ -1,0 +1,17 @@
+version: '3.7'
+
+services: # Containers
+  to_do_list_postgres: # nome do container 
+    image: postgres:latest # imagem que será executada pelo container
+    ports:
+      - '5432:5432' # esquerda - porta na maquina | direita - porta no container
+    restart: always
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=to-do-app
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # persistir dados
+
+volumes:
+  postgres_data:
