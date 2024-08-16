@@ -1,5 +1,6 @@
 import '@/app/ui/global.css';
 import type { Metadata } from 'next';
+import { poppins } from './ui/fonts';
 
 export const metadata: Metadata = {
   title: 'To Do List',
@@ -13,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }
