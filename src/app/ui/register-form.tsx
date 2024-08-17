@@ -1,7 +1,7 @@
 import { ArrowRight, AtSign, KeyRound } from 'lucide-react';
 import { Button } from './button';
 
-export default function LoginForm() {
+export default function RegisterForm() {
   return (
     <form action="">
       <label htmlFor="" className="block mb-3 mt-5">
@@ -12,7 +12,7 @@ export default function LoginForm() {
         <input
           className="rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
           type="text"
-          placeholder="Entre com seu email"
+          placeholder="Informe-nos seu email"
         />
       </div>
 
@@ -24,12 +24,12 @@ export default function LoginForm() {
         <input
           className="rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
           type="password"
-          placeholder="Digite sua senha"
+          placeholder="Cadastre uma senha"
         />
       </div>
 
       <Button className="w-full flex justify-between mt-16">
-        Entrar
+        Criar conta
         <ArrowRight />
       </Button>
     </form>
