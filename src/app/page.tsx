@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { Button } from './ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export default function Page() {
   return (
@@ -10,11 +12,14 @@ export default function Page() {
         style={{ width: '120rem', margin: '0 auto' }}
         className="flex items-center justify-between"
       >
-        <div className="flex flex-col items-start gap-16">
-          <p className="text-7xl">
+        <div className="flex flex-col items-start gap-8">
+          <p className="text-7xl  leading-relaxed">
             Seu app de <br /> lista de tarefas.
           </p>
-          <button>Começar</button>
+          <Button>
+            Começar
+            <ArrowRight />
+          </Button>
         </div>
 
         <div>
