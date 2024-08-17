@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 
@@ -16,10 +18,12 @@ export default function Page() {
           <p className="text-7xl  leading-relaxed">
             Seu app de <br /> lista de tarefas.
           </p>
-          <Button>
-            Começar
-            <ArrowRight />
-          </Button>
+          <Link href="/login">
+            <Button>
+              Começar
+              <ArrowRight />
+            </Button>
+          </Link>
         </div>
 
         <div>
