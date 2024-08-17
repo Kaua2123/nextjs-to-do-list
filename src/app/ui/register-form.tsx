@@ -8,11 +8,14 @@ export default function RegisterForm() {
         Email
       </label>
       <div className="relative mt-4  flex items-center">
-        <AtSign className="absolute ml-4 pointer-events-none" size={20} />
         <input
-          className="rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
+          className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
           type="text"
           placeholder="Informe-nos seu email"
+        />
+        <AtSign
+          className="text-gray-400 peer-focus:text-gray-900  absolute ml-4 pointer-events-none"
+          size={20}
         />
       </div>
 
@@ -20,11 +23,14 @@ export default function RegisterForm() {
         Senha
       </label>
       <div className="relative mt-4 flex items-center">
-        <KeyRound className="absolute ml-4 pointer-events-none" size={20} />
         <input
-          className="rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
+          className="peer rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
           type="password"
           placeholder="Cadastre uma senha"
+        />
+        <KeyRound
+          className="text-gray-400 peer-focus:text-gray-900 absolute ml-4 pointer-events-none"
+          size={20}
         />
       </div>
 

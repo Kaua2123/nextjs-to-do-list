@@ -8,11 +8,14 @@ export default function LoginForm() {
         Email
       </label>
       <div className="relative mt-4  flex items-center">
-        <AtSign className="absolute ml-4 pointer-events-none" size={20} />
         <input
-          className="rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
+          className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
           type="text"
           placeholder="Entre com seu email"
+        />
+        <AtSign
+          className="peer-focus:text-gray-900 text-gray-400 absolute ml-4 pointer-events-none"
+          size={20}
         />
       </div>
 
@@ -20,11 +23,14 @@ export default function LoginForm() {
         Senha
       </label>
       <div className="relative mt-4 flex items-center">
-        <KeyRound className="absolute ml-4 pointer-events-none" size={20} />
         <input
-          className="rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
+          className="peer rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
           type="password"
           placeholder="Digite sua senha"
+        />
+        <KeyRound
+          className="peer-focus:text-gray-900 text-gray-400 absolute ml-4 pointer-events-none"
+          size={20}
         />
       </div>
 
