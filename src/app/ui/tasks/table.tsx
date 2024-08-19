@@ -7,7 +7,7 @@ export default function Table() {
 
   return (
     <>
-      <table className={styles.table}>
+      <table className={`${styles.table} w-full`}>
         <thead>
           <tr>
             <th className="text-xl font-semibold text-left">Nome</th>
@@ -24,9 +24,11 @@ export default function Table() {
               <td>24/09/2024</td>
               <td>{task.status}</td>
               <td>{task.tags}</td>
-              <td className="flex items-center justify-center h-24 gap-5">
-                <EditButton />
-                <DeleteButton />
+              <td className="">
+                <div className="flex items-center justify-center gap-5">
+                  <EditButton />
+                  <DeleteButton />
+                </div>
               </td>
             </tr>
           ))}

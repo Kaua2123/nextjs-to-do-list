@@ -8,28 +8,29 @@ export default function Page() {
     <div>
       <Navbar />
       <div className="min-h-screen">
-        <div className="flex p-36 gap-5">
-          <div className="relative flex items-center w-full">
-            <input
-              placeholder="Buscar tarefas..."
-              className="px-20 p-8 rounded-md w-full peer focus:outline-green-600 border border-gray-200"
-            />
-            <Search
-              size={20}
-              className="pointer-events-none absolute ml-5 text-gray-400 peer-focus:text-gray-900"
-            />
+        <div className="flex flex-col p-36 gap-5">
+          <div>
+            <p className="text-5xl mb-8">Tarefas</p>
           </div>
-          <CreateTaskButton />
+          <div className="flex gap-5">
+            <div className="relative flex items-center w-full">
+              <input
+                placeholder="Buscar tarefas..."
+                className="px-20 p-5 rounded-md w-full peer focus:outline-green-600 border border-gray-200"
+              />
+              <Search
+                size={20}
+                className="pointer-events-none absolute ml-5 text-gray-400 peer-focus:text-gray-900"
+              />
+            </div>
+            <CreateTaskButton />
+          </div>
         </div>
-        <div className="px-36 mt-6 flex">
-          <div className="w-3/5">
-            <p className="text-6xl mb-8 ">Tarefas</p>
-            <div className="bg-gray-50 rounded-3xl p-6">
+        <div className="px-36 ">
+          <div className="w-full">
+            <div className="bg-gray-50 rounded-3xl p-6 w-full">
               <Table />
             </div>
-          </div>
-          <div>
-            <p className="text-6xl">Tarefas recentes</p>
           </div>
         </div>
       </div>

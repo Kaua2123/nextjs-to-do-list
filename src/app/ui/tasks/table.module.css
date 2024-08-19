@@ -1,4 +1,10 @@
 .table th, 
 .table td {
-    padding: 10px;
+    padding: 1.5rem;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+
+.table td {
+    border-bottom: 1px solid #c6d4e2;
 }

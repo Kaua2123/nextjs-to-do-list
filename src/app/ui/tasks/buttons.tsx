@@ -15,7 +15,7 @@ export function CreateTaskButton() {
 export function EditButton() {
   return (
     <>
-      <button className="p-2 rounded-lg border border-gray-300">
+      <button className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100">
         <Pencil />
       </button>
     </>
@@ -25,7 +25,7 @@ export function EditButton() {
 export function DeleteButton() {
   return (
     <>
-      <button className="p-2 rounded-lg border border-gray-300">
+      <button className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100">
         <Trash />
       </button>
     </>
