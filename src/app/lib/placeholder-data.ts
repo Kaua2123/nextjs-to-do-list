@@ -1,5 +1,7 @@
+import { Task } from './definitions';
+
 // arquivo de dados ficticios enqunato as funcionalidades fullstack não estão prontas
-export const tasks = [
+export const tasks: Task[] = [
   {
     id: 1,
     name: 'Reunião com cliente',
