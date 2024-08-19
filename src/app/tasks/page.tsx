@@ -1,7 +1,7 @@
-import { Plus, Search } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Search } from 'lucide-react';
 import Navbar from '../ui/navbar';
 import Table from '../ui/tasks/table';
+import { CreateTaskButton } from '../ui/tasks/buttons';
 
 export default function Page() {
   return (
@@ -19,11 +19,7 @@ export default function Page() {
               className="pointer-events-none absolute ml-5 text-gray-400 peer-focus:text-gray-900"
             />
           </div>
-
-          <Button className="flex items-center justify-center w-96">
-            Criar tarefa
-            <Plus />
-          </Button>
+          <CreateTaskButton />
         </div>
         <div className="px-36 mt-6 flex">
           <div className="w-3/5">

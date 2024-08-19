@@ -1,6 +1,6 @@
 import { tasks } from '@/app/lib/placeholder-data';
-import styles from './table.module.css';
-import { Pencil, Trash } from 'lucide-react';
+import styles from '@/app/ui/tasks/table.module.css';
+import { DeleteButton, EditButton } from '@/app/ui/tasks/buttons';
 
 export default function Table() {
   const fetchTasks = tasks;
@@ -25,12 +25,8 @@ export default function Table() {
               <td>{task.status}</td>
               <td>{task.tags}</td>
               <td className="flex items-center justify-center h-24 gap-5">
-                <button className="border border-gray-200">
-                  <Pencil />
-                </button>
-                <button className="border border-gray-200">
-                  <Trash />
-                </button>
+                <EditButton />
+                <DeleteButton />
               </td>
             </tr>
           ))}
