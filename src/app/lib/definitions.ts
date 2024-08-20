@@ -1,7 +1,7 @@
 // arquivo onde se localiza as tipagens
 
 type Tags = 'social' | 'trabalho' | 'pessoal';
-type Status = 'pending' | 'in progress' | 'completed';
+export type Status = 'pending' | 'in progress' | 'completed';
 
 export type Task = {
   id: number;
