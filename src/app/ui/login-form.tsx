@@ -34,7 +34,7 @@ export default function LoginForm() {
         />
       </div>
 
-      <Button className="w-full flex justify-between mt-16">
+      <Button className="w-full flex justify-between mt-16 bg-green-600">
         Entrar
         <ArrowRight />
       </Button>

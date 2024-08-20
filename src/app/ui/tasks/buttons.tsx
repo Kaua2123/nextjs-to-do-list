@@ -1,13 +1,16 @@
 import { Pencil, Plus, Trash } from 'lucide-react';
 import { Button } from '@/app/ui/button';
+import Link from 'next/link';
 
 export function CreateTaskButton() {
   return (
     <>
-      <Button className="flex items-center justify-center w-96">
-        Criar tarefa
-        <Plus />
-      </Button>
+      <Link href="/tasks/create">
+        <Button className="flex items-center justify-center w-96 bg-green-600">
+          Criar tarefa
+          <Plus />
+        </Button>
+      </Link>
     </>
   );
 }
