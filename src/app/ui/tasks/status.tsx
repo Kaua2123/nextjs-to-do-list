@@ -5,11 +5,11 @@ export function Status({ status }: { status: string }) {
   return (
     <span
       className={clsx(
-        'inline-flex items-center gap-3 bg-gray-200 px-2 py-2 rounded-xl text-white',
+        'inline-flex items-center gap-3 bg-gray-200 px-2 py-2 rounded-xl text-white text-xl',
         {
-          'bg-green-500': status === 'completed',
+          'bg-green-400': status === 'completed',
           'bg-gray-200 text-gray-600': status === 'pending',
-          'bg-blue-500': status === 'in progress',
+          'bg-blue-400': status === 'in progress',
         },
       )}
     >

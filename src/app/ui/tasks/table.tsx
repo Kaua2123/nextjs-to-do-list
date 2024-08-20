@@ -2,6 +2,7 @@ import { tasks } from '@/app/lib/placeholder-data';
 import styles from '@/app/ui/tasks/table.module.css';
 import { DeleteButton, EditButton } from '@/app/ui/tasks/buttons';
 import { Status } from './status';
+import { Tags } from './tags';
 
 export default function Table() {
   const fetchTasks = tasks;
@@ -26,7 +27,9 @@ export default function Table() {
               <td>
                 <Status status={task.status} />
               </td>
-              <td>{task.tags}</td>
+              <td>
+                <Tags tags={task.tags} />
+              </td>
               <td className="">
                 <div className="flex items-center justify-center gap-5">
                   <EditButton />
