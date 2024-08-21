@@ -4,6 +4,8 @@
 
 import { z } from 'zod';
 import { pool } from './db';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const createTaskSchema = z.object({
   // tipo de dado que se espera receber
@@ -53,9 +55,15 @@ export async function createTask(formData: FormData) {
       values: [name, description, tags, 'pending'],
     };
 
-    const res = await pool.query(query);
-    console.log(res.rows[0]);
+    await pool.query(query);
   } catch (error) {
     console.log(error);
   }
+
+  // revalida o caminho passado
+  // invalida / atualiza o cache dessa rota específica, refletindo as atualizações mais recentes
+  revalidatePath('/tasks');
+
+  //redirecionando o usuário
+  redirect('/tasks');
 }
