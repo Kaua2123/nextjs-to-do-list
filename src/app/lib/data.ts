@@ -1,10 +1,18 @@
 // // funções de fetch. podem ser executadas no client-side, por isso, não são server actions.
 // // além disso, não têm a cláusula 'use server'
 
-// export async function fetchTasks() {
-//   try {
-//     console.log('fetching tasks...');
+import { pool } from './db';
+import { Task } from './definitions';
 
-//     await
-//   } catch (error) {}
-// }
+export async function fetchTasks() {
+  try {
+    console.log('fetching tasks...');
+
+    const tasks = await pool.query<Task>('SELECT * from tasks');
+
+    return tasks.rows;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Falha ao tentar buscar tarefas.');
+  }
+}

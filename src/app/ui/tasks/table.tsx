@@ -1,11 +1,12 @@
-import { tasks } from '@/app/lib/placeholder-data';
 import styles from '@/app/ui/tasks/table.module.css';
 import { DeleteButton, EditButton } from '@/app/ui/tasks/buttons';
 import { Status } from './status';
 import { Tags } from './tags';
+import { fetchTasks } from '@/app/lib/data';
 
-export default function Table() {
-  const fetchTasks = tasks;
+export default async function Table() {
+  // componente async. server component
+  const tasks = await fetchTasks();
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function Table() {
         </thead>
 
         <tbody className="bg-white text-2xl">
-          {fetchTasks.map((task, index) => (
+          {tasks.map((task, index) => (
             <tr key={index}>
               <td>{task.name}</td>
               <td>24/09/2024</td>
