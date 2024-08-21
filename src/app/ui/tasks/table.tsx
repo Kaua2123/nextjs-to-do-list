@@ -32,9 +32,9 @@ export default async function Table() {
                 <Tags tags={task.tags} />
               </td>
               <td className="">
-                <div className="flex items-center justify-center gap-5">
+                <div className="flex items-center justify-end gap-5">
                   <EditButton />
-                  <DeleteButton />
+                  <DeleteButton id={task.id} />
                 </div>
               </td>
             </tr>

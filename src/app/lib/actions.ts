@@ -58,6 +58,7 @@ export async function createTask(formData: FormData) {
     await pool.query(query);
   } catch (error) {
     console.log(error);
+    throw new Error('Falha ao tentar criar a tarefa.');
   }
 
   // revalida o caminho passado
@@ -66,4 +67,15 @@ export async function createTask(formData: FormData) {
 
   //redirecionando o usuário
   redirect('/tasks');
+}
+
+export async function deleteTask(id: number) {
+  try {
+    await pool.query(`DELETE FROM tasks WHERE tasks.id = ${id}`);
+  } catch (error) {
+    console.log(error);
+    throw new Error('Falha ao tentar deletar a tarefa.');
+  }
+
+  revalidatePath('/tasks');
 }

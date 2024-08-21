@@ -1,6 +1,7 @@
 import { Pencil, Plus, Trash } from 'lucide-react';
 import { Button } from '@/app/ui/button';
 import Link from 'next/link';
+import { deleteTask } from '@/app/lib/actions';
 
 export function CreateTaskButton() {
   return (
@@ -25,12 +26,16 @@ export function EditButton() {
   );
 }
 
-export function DeleteButton() {
+export function DeleteButton({ id }: { id: number }) {
+  const deleteTaskWithId = deleteTask.bind(null, id); // recebendo a função em si, não seu retorno
+
   return (
     <>
-      <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
-        <Trash size={18} />
-      </button>
+      <form action={deleteTaskWithId}>
+        <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
+          <Trash size={18} />
+        </button>
+      </form>
     </>
   );
 }
