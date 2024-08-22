@@ -34,7 +34,7 @@ export default async function Table() {
                 </td>
                 <td className="">
                   <div className="flex items-center justify-end gap-5">
-                    <EditButton />
+                    <EditButton id={task.id} />
                     <DeleteButton id={task.id} />
                   </div>
                 </td>

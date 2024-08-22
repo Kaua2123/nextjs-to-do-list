@@ -16,12 +16,14 @@ export function CreateTaskButton() {
   );
 }
 
-export function EditButton() {
+export function EditButton({ id }: { id: number }) {
   return (
     <>
-      <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
-        <Pencil size={18} />
-      </button>
+      <Link href={`/tasks/${id}/edit`}>
+        <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
+          <Pencil size={18} />
+        </button>
+      </Link>
     </>
   );
 }
