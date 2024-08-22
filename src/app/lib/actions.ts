@@ -50,7 +50,7 @@ export async function createTask(formData: FormData) {
   const { name, description, tags } = validatedFormData.data;
 
   try {
-    if (!pool) return 'Fail to connect with database';
+    if (!pool) return;
 
     const query = {
       text: 'INSERT INTO tasks(name, description, tags, status) VALUES ($1, $2, $3, $4)',
@@ -73,7 +73,7 @@ export async function createTask(formData: FormData) {
 
 export async function deleteTask(id: number) {
   try {
-    if (!pool) return 'Fail to connect with database';
+    if (!pool) return;
 
     await pool.query(`DELETE FROM tasks WHERE tasks.id = ${id}`);
   } catch (error) {
