@@ -4,7 +4,7 @@ type Tags = 'social' | 'trabalho' | 'pessoal';
 export type Status = 'pending' | 'in progress' | 'completed';
 
 export type Task = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   tags: Tags;

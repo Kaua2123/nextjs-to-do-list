@@ -6,8 +6,9 @@ import { z } from 'zod';
 import { pool } from './db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { Status } from './definitions';
 
-const createTaskSchema = z.object({
+const FormSchema = z.object({
   // tipo de dado que se espera receber
   id: z.string(),
   name: z
@@ -18,6 +19,10 @@ const createTaskSchema = z.object({
   description: z.string({
     invalid_type_error: 'Por favor, digite uma descrição correta.',
   }),
+  status: z.string({
+    invalid_type_error:
+      'Por favor, altere o status de sua tarefa corretamente.',
+  }),
   tags: z.string({
     invalid_type_error: 'Por favor, selecione uma categoria.',
   }),
@@ -25,9 +30,10 @@ const createTaskSchema = z.object({
   updatedAt: z.string(),
 });
 
-const CreateTask = createTaskSchema.omit({
+const CreateTask = FormSchema.omit({
   // omitindo os dados que nao serao fornecidos pelo usuario
   id: true,
+  status: true,
   createdAt: true,
   updatedAt: true,
 });
@@ -68,6 +74,52 @@ export async function createTask(formData: FormData) {
   revalidatePath('/tasks');
 
   //redirecionando o usuário
+  redirect('/tasks');
+}
+
+const UpdateTask = FormSchema.omit({
+  // omitindo os dados que nao serao fornecidos pelo usuario
+  id: true,
+  name: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export async function updateTask(
+  id: string,
+  statusFormData: Status,
+  formData: FormData,
+) {
+  const validatedFormData = UpdateTask.safeParse({
+    description: formData.get('description'),
+    status: statusFormData,
+    tags: formData.get('tags'),
+  });
+
+  if (!validatedFormData.success) {
+    return {
+      errors: validatedFormData.error.flatten().fieldErrors, // exibe os erros de cada campo, graças ao flatten
+      message: 'Há campos faltando. Por favor, preencha todos',
+    };
+  }
+
+  const { description, status, tags } = validatedFormData.data;
+
+  try {
+    if (!pool) return;
+
+    const query = {
+      text: `UPDATE tasks SET description = $1, tags = $2, status = $3 WHERE tasks.id = $4`,
+      values: [description, tags, status, id],
+    };
+
+    await pool.query(query);
+  } catch (error) {
+    console.log(error);
+    throw new Error('Falha ao tentar editar a tarefa.');
+  }
+
+  revalidatePath('/tasks');
   redirect('/tasks');
 }
 

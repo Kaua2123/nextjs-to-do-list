@@ -6,14 +6,17 @@ import Link from 'next/link';
 import { Status, Task } from '@/app/lib/definitions';
 import clsx from 'clsx';
 import { useState } from 'react';
+import { updateTask } from '@/app/lib/actions';
 
 export function EditTaskForm({ task }: { task: undefined | Task[] }) {
   const [status, setStatus] = useState<Status>(
     task ? task[0].status : 'pending',
   );
 
+  const updateTaskWithId = task && updateTask.bind(null, task[0].id, status);
+
   return (
-    <form>
+    <form action={updateTaskWithId}>
       <div className="bg-gray-50 w-full p-12 rounded-3xl">
         <label htmlFor="" className="block mb-3 mt-12">
           Descrição da tarefa
@@ -104,7 +107,7 @@ export function EditTaskForm({ task }: { task: undefined | Task[] }) {
         <Link href="/tasks">
           <AltButton>Cancelar</AltButton>
         </Link>
-        <Button className="bg-green-600">Criar tarefa</Button>
+        <Button className="bg-green-600">Editar tarefa</Button>
       </div>
     </form>
   );
