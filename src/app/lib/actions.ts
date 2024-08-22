@@ -123,7 +123,7 @@ export async function updateTask(
   redirect('/tasks');
 }
 
-export async function deleteTask(id: number) {
+export async function deleteTask(id: string) {
   try {
     if (!pool) return;
 

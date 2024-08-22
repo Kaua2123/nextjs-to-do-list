@@ -16,7 +16,7 @@ export function CreateTaskButton() {
   );
 }
 
-export function EditButton({ id }: { id: number }) {
+export function EditButton({ id }: { id: string }) {
   return (
     <>
       <Link href={`/tasks/${id}/edit`}>
@@ -28,7 +28,7 @@ export function EditButton({ id }: { id: number }) {
   );
 }
 
-export function DeleteButton({ id }: { id: number }) {
+export function DeleteButton({ id }: { id: string }) {
   const deleteTaskWithId = deleteTask.bind(null, id); // recebendo a função em si, não seu retorno
 
   return (
