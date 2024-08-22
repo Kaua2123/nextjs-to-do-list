@@ -8,7 +8,7 @@ export async function fetchTasks() {
   try {
     console.log('fetching tasks...');
 
-    if (!pool) return 'Fail to connect with database';
+    if (!pool) return;
     const tasks = await pool.query<Task>('SELECT * from tasks');
 
     return tasks.rows;

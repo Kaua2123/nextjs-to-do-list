@@ -21,24 +21,25 @@ export default async function Table() {
         </thead>
 
         <tbody className="bg-white text-2xl">
-          {tasks.map((task, index) => (
-            <tr key={index}>
-              <td>{task.name}</td>
-              <td>24/09/2024</td>
-              <td>
-                <Status status={task.status} />
-              </td>
-              <td>
-                <Tags tags={task.tags} />
-              </td>
-              <td className="">
-                <div className="flex items-center justify-end gap-5">
-                  <EditButton />
-                  <DeleteButton id={task.id} />
-                </div>
-              </td>
-            </tr>
-          ))}
+          {tasks &&
+            tasks.map((task, index) => (
+              <tr key={index}>
+                <td>{task.name}</td>
+                <td>24/09/2024</td>
+                <td>
+                  <Status status={task.status} />
+                </td>
+                <td>
+                  <Tags tags={task.tags} />
+                </td>
+                <td className="">
+                  <div className="flex items-center justify-end gap-5">
+                    <EditButton />
+                    <DeleteButton id={task.id} />
+                  </div>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </>
