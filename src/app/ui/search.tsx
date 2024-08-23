@@ -2,13 +2,15 @@
 
 import { SearchIcon } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Search() {
   const searchParams = useSearchParams(); // para acessar parâmetros de busca da URL atual (?query=...)
   const pathname = usePathname(); // caminho atual da rota
   const { replace } = useRouter(); // para manipular a URL da rota. substitui
 
-  const handleChange = (query: string) => {
+  // useDebouncedCallback irá executar a função a cada 300ms após o usuario parar de digitar.
+  const handleChange = useDebouncedCallback((query: string) => {
     // criando uma nova instância de URLSearchParams usando searchParams
     const params = new URLSearchParams(searchParams);
     if (query) {
@@ -19,7 +21,7 @@ export default function Search() {
 
     replace(`${pathname}?${params.toString()}`);
     // pega o caminho atual da rota e atualiza os parâmetros de busca
-  };
+  }, 300);
 
   return (
     <div className="relative flex items-center w-full">
