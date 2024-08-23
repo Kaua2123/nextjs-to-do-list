@@ -35,3 +35,20 @@ export async function fetchTasksById(id: string) {
     throw new Error(`Falha ao tentar buscar tarefa de id ${id}.`);
   }
 }
+
+export async function fetchFilteredTasks(query: string) {
+  try {
+    if (!pool) return;
+
+    console.log('fetching task with query: ', query);
+
+    const tasks = await pool.query<Task>(
+      `SELECT * FROM TASKS WHERE tasks."name" LIKE '%${query}%' `,
+    );
+
+    return tasks.rows;
+  } catch (error) {
+    console.log(error);
+    throw new Error(`Falha ao tentar buscar tarefa: ${query}.`);
+  }
+}

@@ -2,7 +2,7 @@ import styles from '@/app/ui/tasks/table.module.css';
 import { DeleteButton, EditButton } from '@/app/ui/tasks/buttons';
 import { Status } from './status';
 import { Tags } from './tags';
-import { fetchTasks } from '@/app/lib/data';
+import { fetchFilteredTasks, fetchTasks } from '@/app/lib/data';
 
 export default async function Table({
   query,
@@ -13,6 +13,7 @@ export default async function Table({
 }) {
   // componente async. server component
   const tasks = await fetchTasks();
+  const filteredTasks = await fetchFilteredTasks(query);
   console.log(query, currentPage);
 
   return (
@@ -28,8 +29,29 @@ export default async function Table({
         </thead>
 
         <tbody className="bg-white text-2xl">
-          {tasks &&
+          {!query &&
+            tasks &&
             tasks.map((task, index) => (
+              <tr key={index}>
+                <td>{task.name}</td>
+                <td>24/09/2024</td>
+                <td>
+                  <Status status={task.status} />
+                </td>
+                <td>
+                  <Tags tags={task.tags} />
+                </td>
+                <td className="">
+                  <div className="flex items-center justify-end gap-5">
+                    <EditButton id={task.id} />
+                    <DeleteButton id={task.id} />
+                  </div>
+                </td>
+              </tr>
+            ))}
+          {query &&
+            filteredTasks &&
+            filteredTasks.map((task, index) => (
               <tr key={index}>
                 <td>{task.name}</td>
                 <td>24/09/2024</td>
