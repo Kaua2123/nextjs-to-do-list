@@ -3,7 +3,18 @@ import Table from '../ui/tasks/table';
 import { CreateTaskButton } from '../ui/tasks/buttons';
 import Search from '../ui/search';
 
-export default function Page() {
+// todos os Page Components aceitam a prop searchParams
+export default function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
+}) {
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
   return (
     <div>
       <Navbar />
@@ -21,7 +32,7 @@ export default function Page() {
               <div className="">
                 <div className="w-full">
                   <div className="bg-gray-50 rounded-3xl p-6 w-full">
-                    <Table />
+                    <Table query={query} currentPage={currentPage} />
                   </div>
                 </div>
               </div>

@@ -4,9 +4,16 @@ import { Status } from './status';
 import { Tags } from './tags';
 import { fetchTasks } from '@/app/lib/data';
 
-export default async function Table() {
+export default async function Table({
+  query,
+  currentPage,
+}: {
+  query: string;
+  currentPage: number;
+}) {
   // componente async. server component
   const tasks = await fetchTasks();
+  console.log(query, currentPage);
 
   return (
     <>
