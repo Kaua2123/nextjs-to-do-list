@@ -13,8 +13,7 @@ export default async function Table({
 }) {
   // componente async. server component
   const tasks = await fetchTasks();
-  const filteredTasks = await fetchFilteredTasks(query);
-  console.log(query, currentPage);
+  const filteredTasks = await fetchFilteredTasks(query, currentPage);
 
   return (
     <>

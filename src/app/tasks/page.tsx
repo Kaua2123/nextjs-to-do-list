@@ -2,9 +2,10 @@ import Navbar from '../ui/navbar';
 import Table from '../ui/tasks/table';
 import { CreateTaskButton } from '../ui/tasks/buttons';
 import Search from '../ui/search';
+import { fetchTasksPages } from '../lib/data';
 
 // todos os Page Components aceitam a prop searchParams
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams?: {
@@ -14,6 +15,8 @@ export default function Page({
 }) {
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = await fetchTasksPages(query);
+  console.log(totalPages);
 
   return (
     <div>
