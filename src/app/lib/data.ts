@@ -28,7 +28,8 @@ export async function fetchTasksById(id: string) {
     console.log('fetching task...');
 
     const tasks = await pool.query<Task>(
-      `SELECT * FROM TASKS WHERE tasks.id = ${id}`,
+      `SELECT * FROM TASKS WHERE tasks.id = $1`,
+      [`${id}`],
     );
 
     return tasks.rows;
@@ -45,7 +46,8 @@ export async function fetchFilteredTasks(query: string, currentPage: number) {
     console.log('fetching task with query: ', query);
 
     const tasks = await pool.query<Task>(
-      `SELECT * FROM TASKS WHERE tasks.name LIKE '%${query}%' ORDER BY tasks.name LIMIT 6 OFFSET (${currentPage} - 1) * 6 `,
+      `SELECT * FROM TASKS WHERE tasks.name LIKE $1 ORDER BY tasks.name LIMIT 6 OFFSET ($2 - 1) * 6 `,
+      [`%${query}%`, `${currentPage}`],
     );
 
     return tasks.rows;
