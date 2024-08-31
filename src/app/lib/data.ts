@@ -10,6 +10,8 @@ export async function fetchTasks() {
   try {
     if (!pool) return;
 
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // delay ficticio
+
     console.log('fetching tasks...');
 
     const tasks = await pool.query<Task>('SELECT * from tasks');
