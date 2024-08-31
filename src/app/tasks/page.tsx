@@ -3,6 +3,7 @@ import Table from '../ui/tasks/table';
 import { CreateTaskButton } from '../ui/tasks/buttons';
 import Search from '../ui/search';
 import { fetchTasksPages } from '../lib/data';
+import { TasksSkeleton } from '../ui/skeletons';
 
 // todos os Page Components aceitam a prop searchParams
 export default async function Page({
@@ -36,6 +37,7 @@ export default async function Page({
                 <div className="w-full">
                   <div className="bg-gray-50 rounded-3xl p-6 w-full">
                     <Table query={query} currentPage={currentPage} />
+                    <TasksSkeleton />
                   </div>
                 </div>
               </div>

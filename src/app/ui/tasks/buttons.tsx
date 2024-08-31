@@ -2,6 +2,7 @@ import { Pencil, Plus, Trash } from 'lucide-react';
 import { Button } from '@/app/ui/button';
 import Link from 'next/link';
 import { deleteTask } from '@/app/lib/actions';
+import clsx from 'clsx';
 
 export function CreateTaskButton() {
   return (
@@ -16,11 +17,18 @@ export function CreateTaskButton() {
   );
 }
 
-export function EditButton({ id }: { id: string }) {
+export function EditButton({ id }: { id?: string }) {
+  const isDisabled = !id;
   return (
     <>
-      <Link href={`/tasks/${id}/edit`}>
-        <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
+      <Link href={isDisabled ? '#' : `/tasks/${id}/edit`}>
+        <button
+          style={isDisabled ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
+          className={clsx('p-3 rounded-lg border border-gray-300 ', {
+            'hover:bg-gray-100': !isDisabled,
+          })}
+          aria-disabled={isDisabled}
+        >
           <Pencil size={18} />
         </button>
       </Link>
@@ -28,13 +36,20 @@ export function EditButton({ id }: { id: string }) {
   );
 }
 
-export function DeleteButton({ id }: { id: string }) {
-  const deleteTaskWithId = deleteTask.bind(null, id); // recebendo a função em si, não seu retorno
+export function DeleteButton({ id }: { id?: string }) {
+  const isDisabled = !id;
+  const deleteTaskWithId = id ? deleteTask.bind(null, id) : ''; // recebendo a função em si, não seu retorno
 
   return (
     <>
-      <form action={deleteTaskWithId}>
-        <button className="p-3 rounded-lg border border-gray-300 hover:bg-gray-100">
+      <form action={id ? deleteTaskWithId : ''}>
+        <button
+          style={isDisabled ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
+          className={clsx('p-3 rounded-lg border border-gray-300 ', {
+            'hover:bg-gray-100': !isDisabled,
+          })}
+          aria-disabled={isDisabled}
+        >
           <Trash size={18} />
         </button>
       </form>
