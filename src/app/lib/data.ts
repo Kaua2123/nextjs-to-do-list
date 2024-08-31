@@ -6,23 +6,6 @@ import { Task } from './definitions';
 
 const TASKS_PER_PAGE = 6;
 
-export async function fetchTasks() {
-  try {
-    if (!pool) return;
-
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // delay ficticio
-
-    console.log('fetching tasks...');
-
-    const tasks = await pool.query<Task>('SELECT * from tasks');
-
-    return tasks.rows;
-  } catch (error) {
-    console.log(error);
-    throw new Error('Falha ao tentar buscar tarefas.');
-  }
-}
-
 export async function fetchTasksById(id: string) {
   try {
     if (!pool) return;
