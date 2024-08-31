@@ -5,6 +5,7 @@ import Search from '../ui/search';
 import { fetchTasksPages } from '../lib/data';
 import { TasksSkeleton } from '../ui/skeletons';
 import { Suspense } from 'react';
+import Pagination from '../ui/tasks/pagination';
 
 // todos os Page Components aceitam a prop searchParams
 export default async function Page({
@@ -40,6 +41,9 @@ export default async function Page({
                     <Suspense fallback={<TasksSkeleton />}>
                       <Table query={query} currentPage={currentPage} />
                     </Suspense>
+                  </div>
+                  <div className="mt-10 ml-10 flex gap-4">
+                    <Pagination totalPages={totalPages} />
                   </div>
                 </div>
               </div>

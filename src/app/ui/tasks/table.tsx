@@ -16,7 +16,7 @@ export default async function Table({
 
   return (
     <>
-      <table className={`${styles.table} w-full shadow-md`}>
+      <table className={`${styles.table} w-full rounded-md`}>
         <thead>
           <tr>
             <th className="text-xl font-semibold text-left">Nome</th>
