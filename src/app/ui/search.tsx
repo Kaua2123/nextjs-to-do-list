@@ -13,6 +13,8 @@ export default function Search() {
   const handleChange = useDebouncedCallback((query: string) => {
     // criando uma nova instância de URLSearchParams usando searchParams
     const params = new URLSearchParams(searchParams);
+
+    params.set('page', '1');
     if (query) {
       params.set('query', query); // setando um parâmetro
     } else {
