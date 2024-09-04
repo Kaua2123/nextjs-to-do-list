@@ -173,7 +173,7 @@ export async function createUser(formData: FormData) {
     if (!pool) return;
 
     const query = {
-      text: `INSERT INTO users values email = $1, password = $2`,
+      text: `INSERT INTO users(email, password) VALUES ($1, $2)`,
       values: [email, password],
     };
 
