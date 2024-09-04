@@ -9,7 +9,7 @@ export function Status({ status }: { status?: string }) {
         {
           'bg-green-400 text-white': status === 'completed',
           'bg-gray-200 text-gray-600': status === 'pending',
-          'bg-blue-400 text-white': status === 'in progress',
+          'bg-blue-400 text-white': status === 'in_progress',
           'bg-gray-200 text-gray-200 animate-pulse': !status,
         },
       )}
@@ -28,7 +28,7 @@ export function Status({ status }: { status?: string }) {
         </>
       )}
 
-      {status == 'in progress' && (
+      {status == 'in_progress' && (
         <>
           In Progress
           <Loader2 size={14} />

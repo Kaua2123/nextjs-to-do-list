@@ -54,13 +54,13 @@ export function EditTaskForm({ task }: { task: undefined | Task[] }) {
             <Clock size={14} />
           </span>
           <span
-            onClick={() => setStatus('in progress')}
+            onClick={() => setStatus('in_progress')}
             className={clsx(
               'inline-flex items-center gap-3 px-2 py-2 rounded-xl text-xl ',
               {
-                'bg-blue-400 text-white': status === 'in progress',
+                'bg-blue-400 text-white': status === 'in_progress',
                 'bg-white text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white cursor-pointer':
-                  status !== 'in progress',
+                  status !== 'in_progress',
               },
             )}
           >

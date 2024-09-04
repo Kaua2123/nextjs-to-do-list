@@ -8,7 +8,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Status } from './definitions';
 
-const FormSchema = z.object({
+const TaskSchema = z.object({
   // tipo de dado que se espera receber
   id: z.string(),
   name: z
@@ -30,12 +30,30 @@ const FormSchema = z.object({
   updatedAt: z.string(),
 });
 
-const CreateTask = FormSchema.omit({
+const UserSchema = z.object({
+  id: z.string(),
+  email: z
+    .string({
+      invalid_type_error: 'Por favor, digite um email correto.',
+    })
+    .min(3, 'O email deve ter, pelo menos, 3 caracteres.'),
+  password: z
+    .string({
+      invalid_type_error: 'Por favor, digite uma senha correta.',
+    })
+    .min(5, 'Por segurança, a senha deve ter ao menos 5 caracteres.'),
+});
+
+const CreateTask = TaskSchema.omit({
   // omitindo os dados que nao serao fornecidos pelo usuario
   id: true,
   status: true,
   createdAt: true,
   updatedAt: true,
+});
+
+const CreateUser = UserSchema.omit({
+  id: true,
 });
 
 export async function createTask(formData: FormData) {
@@ -77,7 +95,7 @@ export async function createTask(formData: FormData) {
   redirect('/tasks');
 }
 
-const UpdateTask = FormSchema.omit({
+const UpdateTask = TaskSchema.omit({
   // omitindo os dados que nao serao fornecidos pelo usuario
   id: true,
   name: true,
@@ -134,4 +152,36 @@ export async function deleteTask(id: string) {
   }
 
   revalidatePath('/tasks');
+}
+
+export async function createUser(formData: FormData) {
+  const validatedFormData = CreateUser.safeParse({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  });
+
+  if (!validatedFormData.success) {
+    return {
+      errors: validatedFormData.error.flatten().fieldErrors, // exibe os erros de cada campo, graças ao flatten
+      message: 'Há campos faltando. Por favor, preencha todos',
+    };
+  }
+
+  const { email, password } = validatedFormData.data;
+
+  try {
+    if (!pool) return;
+
+    const query = {
+      text: `INSERT INTO users values email = $1, password = $2`,
+      values: [email, password],
+    };
+
+    await pool.query(query);
+  } catch (error) {
+    console.log(error);
+    throw new Error('Falha ao tentar criar uma nova conta.');
+  }
+
+  redirect('/tasks');
 }

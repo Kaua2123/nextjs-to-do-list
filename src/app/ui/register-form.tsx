@@ -1,9 +1,10 @@
 import { ArrowRight, AtSign, KeyRound } from 'lucide-react';
 import { Button } from './button';
+import { createUser } from '../lib/actions';
 
 export default function RegisterForm() {
   return (
-    <form action="">
+    <form action={createUser}>
       <label htmlFor="" className="block mb-3 mt-5">
         Email
       </label>
@@ -12,6 +13,7 @@ export default function RegisterForm() {
           className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
           type="text"
           placeholder="Informe-nos seu email"
+          name="email"
         />
         <AtSign
           className="text-gray-400 peer-focus:text-gray-900  absolute ml-4 pointer-events-none"
@@ -27,6 +29,7 @@ export default function RegisterForm() {
           className="peer rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
           type="password"
           placeholder="Cadastre uma senha"
+          name="password"
         />
         <KeyRound
           className="text-gray-400 peer-focus:text-gray-900 absolute ml-4 pointer-events-none"
