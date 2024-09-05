@@ -7,6 +7,8 @@ import { pool } from './db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Status } from './definitions';
+import { signIn } from '../../../auth';
+import { AuthError } from 'next-auth';
 
 const TaskSchema = z.object({
   // tipo de dado que se espera receber
@@ -184,4 +186,20 @@ export async function createUser(formData: FormData) {
   }
 
   redirect('/tasks');
+}
+
+export async function authenticate(formData: FormData) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
 }
