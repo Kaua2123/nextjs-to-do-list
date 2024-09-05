@@ -1,6 +1,6 @@
-import type { NextAuthOptions } from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
 
-export const authConfig: NextAuthOptions = {
+export const authConfig = {
   pages: {
     signIn: '/login',
   },
@@ -10,4 +10,4 @@ export const authConfig: NextAuthOptions = {
   },
   // diferentes opções de login
   providers: [],
-};
+} satisfies NextAuthConfig;
