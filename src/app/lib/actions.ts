@@ -7,7 +7,7 @@ import { pool } from './db';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { Status } from './definitions';
-import { signIn } from '../../../auth';
+import { signIn, signOut } from '../../../auth';
 import { AuthError } from 'next-auth';
 
 const TaskSchema = z.object({
@@ -191,6 +191,8 @@ export async function createUser(formData: FormData) {
 export async function authenticate(formData: FormData) {
   try {
     await signIn('credentials', formData);
+
+    redirect('/tasks');
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -202,4 +204,8 @@ export async function authenticate(formData: FormData) {
     }
     throw error;
   }
+}
+
+export async function handleSignOut() {
+  await signOut();
 }

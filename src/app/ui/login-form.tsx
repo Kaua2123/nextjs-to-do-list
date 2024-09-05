@@ -1,9 +1,12 @@
+'use client';
+
 import { ArrowRight, AtSign, KeyRound } from 'lucide-react';
 import { Button } from './button';
+import { authenticate } from '../lib/actions';
 
 export default function LoginForm() {
   return (
-    <form action="">
+    <form action={authenticate}>
       <label htmlFor="" className="block mb-3 mt-5">
         Email
       </label>
