@@ -10,9 +10,10 @@ async function getUser(email: string): Promise<User | undefined> {
   try {
     if (!pool) return;
 
-    const query = `SELECT * FROM users where email=${email}`;
+    const query = `SELECT * FROM users where email = $1`;
+    const values = [email];
 
-    const user = await pool.query(query);
+    const user = await pool.query(query, values);
     return user.rows[0];
   } catch (error) {
     console.error('Falha ao buscar usuário.', error);
@@ -25,6 +26,8 @@ export const { auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       // credentials - sem integração com nenhum provedor externo
+      // authorizew é uma funçao callback. apos o usuario fornecer as credenciais,
+      // authorize é executada.
       async authorize(credentials) {
         const parsedCredentials = z
           .object({

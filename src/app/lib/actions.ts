@@ -193,9 +193,12 @@ export async function createUser(formData: FormData) {
 
 export async function authenticate(formData: FormData) {
   try {
-    await signIn('credentials', formData);
-
-    redirect('/tasks');
+    await signIn('credentials', {
+      email: formData.get('email'),
+      password: formData.get('password'),
+      redirect: true,
+      redirectTo: '/tasks',
+    });
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
@@ -210,5 +213,9 @@ export async function authenticate(formData: FormData) {
 }
 
 export async function handleSignOut() {
-  await signOut();
+  console.log('signing out...');
+  await signOut({
+    redirect: true,
+    redirectTo: 'localhost:3000',
+  });
 }
