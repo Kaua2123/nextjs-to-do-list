@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import { Status } from './definitions';
 import { signIn, signOut } from '../../../auth';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcrypt';
 
 const TaskSchema = z.object({
   // tipo de dado que se espera receber
@@ -171,12 +172,14 @@ export async function createUser(formData: FormData) {
 
   const { email, password } = validatedFormData.data;
 
+  const hashPassword = await bcrypt.hash(password, 8);
+
   try {
     if (!pool) return;
 
     const query = {
       text: `INSERT INTO users(email, password) VALUES ($1, $2)`,
-      values: [email, password],
+      values: [email, hashPassword],
     };
 
     await pool.query(query);

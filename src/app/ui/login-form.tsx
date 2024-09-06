@@ -15,6 +15,7 @@ export default function LoginForm() {
           className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
           type="text"
           placeholder="Entre com seu email"
+          name="email"
         />
         <AtSign
           className="peer-focus:text-gray-900 text-gray-400 absolute ml-4 pointer-events-none"
@@ -30,6 +31,7 @@ export default function LoginForm() {
           className="peer rounded-md p-4 px-20 border border-gray-200 focus:outline-green-600 w-full"
           type="password"
           placeholder="Digite sua senha"
+          name="password"
         />
         <KeyRound
           className="peer-focus:text-gray-900 text-gray-400 absolute ml-4 pointer-events-none"
