@@ -19,19 +19,32 @@ const TaskSchema = z.object({
       invalid_type_error: 'Por favor, digite um nome correto.',
     })
     .min(4, 'Nome da tarefa precisa ter mais de 4 caracteres.'),
-  description: z.string({
-    invalid_type_error: 'Por favor, digite uma descrição correta.',
+  description: z
+    .string({
+      invalid_type_error: 'Por favor, digite uma descrição correta.',
+    })
+    .min(1, 'Descrição não pode ficar em branco.'),
+  status: z.enum(['pending', 'in_progress', 'completed'], {
+    invalid_type_error: 'Por favor, selecione um status.',
   }),
-  status: z.string({
-    invalid_type_error:
-      'Por favor, altere o status de sua tarefa corretamente.',
-  }),
-  tags: z.string({
+  tags: z.enum(['pessoal', 'trabalho', 'social'], {
     invalid_type_error: 'Por favor, selecione uma categoria.',
   }),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
+
+export type State =
+  | undefined
+  | {
+      errors?: {
+        // todos os campos de task que podem lançar um ou mais erros
+        name?: string[];
+        description?: string[];
+        tags?: string[];
+      };
+      message?: string | null;
+    };
 
 const UserSchema = z.object({
   id: z.string(),
@@ -59,7 +72,8 @@ const CreateUser = UserSchema.omit({
   id: true,
 });
 
-export async function createTask(formData: FormData) {
+export async function createTask(prevState: State, formData: FormData) {
+  // prev state contem o estado passado pelo hook useActionState
   const validatedFormData = CreateTask.safeParse({
     // valida os dados de forma segura. retorna um objeto checnado se a validação foi sucedida ou não
     name: formData.get('name'),
@@ -87,7 +101,9 @@ export async function createTask(formData: FormData) {
     await pool.query(query);
   } catch (error) {
     console.log(error);
-    throw new Error('Falha ao tentar criar a tarefa.');
+    return {
+      message: 'Database Error: Falha ao tentar criar uma tarefa.',
+    };
   }
 
   // revalida o caminho passado
