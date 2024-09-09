@@ -6,17 +6,22 @@ import Link from 'next/link';
 import { Status, Task } from '@/app/lib/definitions';
 import clsx from 'clsx';
 import { useState } from 'react';
-import { updateTask } from '@/app/lib/actions';
+import { updateTask, UpdateTaskState } from '@/app/lib/actions';
+import { useFormState } from 'react-dom';
 
-export function EditTaskForm({ task }: { task: undefined | Task[] }) {
+export function EditTaskForm({ task }: { task: Task[] | undefined }) {
   const [status, setStatus] = useState<Status>(
     task ? task[0].status : 'pending',
   );
+  const tasks = task ?? []; // se task for undefined, terá como valor fallback um array vazio.
 
-  const updateTaskWithId = task && updateTask.bind(null, task[0].id, status);
+  const updateTaskWithId = updateTask.bind(null, tasks[0].id, status);
+
+  const initialState: UpdateTaskState = { message: null, errors: {} };
+  const [state, formAction] = useFormState(updateTaskWithId, initialState);
 
   return (
-    <form action={updateTaskWithId}>
+    <form action={formAction}>
       <div className="bg-gray-50 w-full p-12 rounded-3xl">
         <label htmlFor="" className="block mb-3 mt-12">
           Descrição da tarefa
@@ -28,11 +33,19 @@ export function EditTaskForm({ task }: { task: undefined | Task[] }) {
             type="text"
             placeholder="Nos dê mais detalhes sobre a tarefa"
             defaultValue={task && task[0].description}
+            aria-describedby="description-error"
           />
           <NotepadText
             className="peer-focus:text-gray-900 text-gray-400 absolute ml-4 pointer-events-none"
             size={20}
           />
+        </div>
+        <div id="description-error">
+          {state?.errors?.description?.map((error: string) => (
+            <p className="mt-4 text-md text-red-500" key={error}>
+              {error}
+            </p>
+          ))}
         </div>
 
         <label htmlFor="" className="block mb-3 mt-12">

@@ -114,6 +114,16 @@ export async function createTask(prevState: State, formData: FormData) {
   redirect('/tasks');
 }
 
+export type UpdateTaskState =
+  | undefined
+  | {
+      errors?: {
+        // todos os campos de task que podem lançar um ou mais erros
+        description?: string[];
+      };
+      message?: string | null;
+    };
+
 const UpdateTask = TaskSchema.omit({
   // omitindo os dados que nao serao fornecidos pelo usuario
   id: true,
@@ -125,6 +135,7 @@ const UpdateTask = TaskSchema.omit({
 export async function updateTask(
   id: string,
   statusFormData: Status,
+  prevState: UpdateTaskState,
   formData: FormData,
 ) {
   const validatedFormData = UpdateTask.safeParse({
