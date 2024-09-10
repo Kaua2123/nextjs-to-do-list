@@ -184,7 +184,18 @@ export async function deleteTask(id: string) {
   revalidatePath('/tasks');
 }
 
-export async function createUser(formData: FormData) {
+export type RegisterState =
+  | undefined
+  | {
+      errors?: {
+        email?: string[];
+        password?: string[];
+      };
+
+      message?: string | null;
+    };
+
+export async function createUser(prevState: RegisterState, formData: FormData) {
   const validatedFormData = CreateUser.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
