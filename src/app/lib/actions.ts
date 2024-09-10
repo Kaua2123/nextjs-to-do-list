@@ -217,8 +217,17 @@ export async function createUser(formData: FormData) {
 
   redirect('/tasks');
 }
+// o state é sempre referente ao retorno da função.
+export type AuthState =
+  | undefined
+  | {
+      errors?: {
+        errorMessage?: string;
+      };
+      message?: string | null;
+    };
 
-export async function authenticate(formData: FormData) {
+export async function authenticate(prevState: AuthState, formData: FormData) {
   try {
     await signIn('credentials', {
       email: formData.get('email'),
@@ -226,13 +235,26 @@ export async function authenticate(formData: FormData) {
       redirect: true,
       redirectTo: '/tasks',
     });
+
+    return {
+      errors: {},
+      message: 'Logado com sucesso.',
+    };
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return 'Invalid credentials.';
+          return {
+            errors: {
+              errorMessage: 'Credenciais inválidas.',
+            },
+          };
         default:
-          return 'Something went wrong.';
+          return {
+            errors: {
+              errorMessage: 'Algo deu errado.',
+            },
+          };
       }
     }
     throw error;
