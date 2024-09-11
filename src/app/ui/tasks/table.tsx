@@ -3,6 +3,7 @@ import { DeleteButton, EditButton } from '@/app/ui/tasks/buttons';
 import { Status } from './status';
 import { Tags } from './tags';
 import { fetchFilteredTasks } from '@/app/lib/data';
+import { convertDateFormat } from '@/app/lib/utils';
 
 export default async function Table({
   query,
@@ -16,7 +17,19 @@ export default async function Table({
 
   return (
     <>
-      <table className={`${styles.table} w-full rounded-md`}>
+      <div className="md:hidden grid gap-16 items-center justify-center">
+        {tasks &&
+          tasks.map((task, index) => (
+            <div
+              key={index}
+              className="bg-green-50 rounded-xl min-w-96 h-40 grid"
+            >
+              <p className="text-xl">{convertDateFormat(task.created_at)}</p>
+              <p className="text-2xl font-bold">{task.name}</p>
+            </div>
+          ))}
+      </div>
+      <table className={`${styles.table} w-full rounded-md hidden md:table`}>
         <thead>
           <tr>
             <th className="text-xl font-semibold text-left">Nome</th>
@@ -31,7 +44,7 @@ export default async function Table({
             tasks.map((task, index) => (
               <tr key={index}>
                 <td>{task.name}</td>
-                <td>24/09/2024</td>
+                <td>{convertDateFormat(task.created_at)}</td>
                 <td>
                   <Status status={task.status} />
                 </td>
