@@ -15,10 +15,21 @@ export const convertDateFormat = (date: string, isMobile?: boolean) => {
   const newDate = new Date(date);
   console.log(newDate);
 
-  const hours = newDate.getHours() + ':' + newDate.getMinutes();
+  const leftZeroInHours =
+    newDate.getHours() - 3 < 10
+      ? '0' + (newDate.getHours() - 3)
+      : newDate.getHours() - 3;
+
+  const hours = leftZeroInHours + ':' + newDate.getMinutes();
+
+  const leftZeroInDay =
+    newDate.getDate() < 10 ? '0' + newDate.getDate() : newDate.getDate();
+
+  const leftZeroInMonth =
+    newDate.getMonth() < 10 ? '0' + newDate.getMonth() : newDate.getMonth();
 
   const formattedDate =
-    newDate.getDay() + '/' + newDate.getMonth() + '/' + newDate.getFullYear();
+    leftZeroInDay + '/' + leftZeroInMonth + '/' + newDate.getFullYear();
 
   console.log('Criado em: ', formattedDate + 'às' + hours);
 
