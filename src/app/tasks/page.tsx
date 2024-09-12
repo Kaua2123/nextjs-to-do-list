@@ -30,7 +30,7 @@ export default async function Page({
             <p className="text-5xl mb-8">Tarefas</p>
           </div>
           <div className="flex flex-col gap-16">
-            <div className="flex gap-5 items-center">
+            <div className="flex md:flex-row flex-col gap-5 items-center">
               <Search />
               <CreateTaskButton />
             </div>

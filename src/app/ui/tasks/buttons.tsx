@@ -8,7 +8,7 @@ export function CreateTaskButton() {
   return (
     <>
       <Link href="/tasks/create">
-        <Button className="flex items-center justify-center w-96 bg-green-600">
+        <Button className="flex items-center justify-center md:w-96 w-80 bg-green-600">
           Criar tarefa
           <Plus />
         </Button>

@@ -26,7 +26,7 @@ export default function Search() {
   }, 300);
 
   return (
-    <div className="relative flex items-center w-full">
+    <div className="relative flex items-center w-80 md:w-full">
       <input
         onChange={(e) => handleChange(e.target.value)}
         placeholder="Buscar tarefas..."
