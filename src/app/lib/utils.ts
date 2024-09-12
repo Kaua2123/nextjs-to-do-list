@@ -11,7 +11,7 @@ export const generatePages = (totalPages: number | undefined) => {
   return allPages;
 };
 
-export const convertDateFormat = (date: string) => {
+export const convertDateFormat = (date: string, isMobile?: boolean) => {
   const newDate = new Date(date);
   console.log(newDate);
 
@@ -22,5 +22,9 @@ export const convertDateFormat = (date: string) => {
 
   console.log('Criado em: ', formattedDate + 'às' + hours);
 
-  return `Criado em ${formattedDate} às ${hours}`;
+  if (!isMobile) {
+    return `Criado em ${formattedDate} às ${hours}`;
+  }
+
+  return `${formattedDate}`;
 };

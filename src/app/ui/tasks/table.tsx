@@ -22,10 +22,26 @@ export default async function Table({
           tasks.map((task, index) => (
             <div
               key={index}
-              className="bg-green-50 rounded-xl min-w-96 h-40 grid"
+              className="bg-gray-50  border p-8 shadow-md border-gray-200 rounded-xl min-w-96 min-h-52 grid relative"
             >
-              <p className="text-xl">{convertDateFormat(task.created_at)}</p>
-              <p className="text-2xl font-bold">{task.name}</p>
+              <div className="flex flex-col items-start justify-center gap-6">
+                <p className="text-xl mx-8">
+                  {task.created_at
+                    ? convertDateFormat(task.created_at, true)
+                    : 'Buscando data de criação...'}
+                </p>
+                <p className="text-2xl font-bold mx-8">{task.name}</p>
+                <div className="flex flex-col items-center mx-8 gap-8">
+                  <div className="flex gap-4 mb-12">
+                    <EditButton id={task.id} />
+                    <DeleteButton id={task.id} />
+                  </div>
+                  <div className="flex gap-3 absolute right-2 bottom-2">
+                    <Status status={task.status} />
+                    <Tags tags={task.tags} />
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
       </div>
@@ -44,7 +60,11 @@ export default async function Table({
             tasks.map((task, index) => (
               <tr key={index}>
                 <td>{task.name}</td>
-                <td>{convertDateFormat(task.created_at)}</td>
+                <td>
+                  {task.created_at
+                    ? convertDateFormat(task.created_at, false)
+                    : 'Buscando data de criação...'}
+                </td>
                 <td>
                   <Status status={task.status} />
                 </td>
