@@ -13,14 +13,14 @@ export function CreateTaskForm() {
 
   return (
     <form action={formAction}>
-      <div className="bg-gray-50 w-full p-12 rounded-3xl">
+      <div className="bg-gray-50 w-full p-4 rounded-5xl md:p-12 md:rounded-3xl">
         <label htmlFor="" className="block mb-3 mt-5">
           Nome da tarefa
         </label>
         <div className="relative mt-4  flex items-center">
           <input
             name="name"
-            className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
+            className="text-lg md:text-2xl peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
             type="text"
             placeholder="Nomeie sua tarefa"
             aria-describedby="name-error"
@@ -45,7 +45,7 @@ export function CreateTaskForm() {
         <div className="relative mt-4  flex items-center">
           <input
             name="description"
-            className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
+            className="text-lg md:text-2xl peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
             type="text"
             placeholder="Nos dê mais detalhes sobre a tarefa"
             aria-describedby="description-error"
@@ -70,7 +70,7 @@ export function CreateTaskForm() {
           <select
             name="tags"
             style={{ paddingLeft: '4.5rem' }}
-            className="peer rounded-md p-4 border border-gray-200 w-full focus:outline-green-600"
+            className="text-lg md:text-2xl peer rounded-md p-4 border border-gray-200 w-full focus:outline-green-600"
             aria-describedby="tags-error"
           >
             <option value="social">Social</option>
@@ -90,9 +90,9 @@ export function CreateTaskForm() {
           ))}
         </div>
       </div>
-      <div className="flex gap-10 mt-20 justify-end">
+      <div className="flex md:flex-row flex-col gap-2 md:gap-10 mt-10 md:mt-20 md:justify-end">
         <Link href="/tasks">
-          <AltButton>Cancelar</AltButton>
+          <AltButton className="md:w-auto w-full">Cancelar</AltButton>
         </Link>
         <Button className="bg-green-600">Criar tarefa</Button>
       </div>

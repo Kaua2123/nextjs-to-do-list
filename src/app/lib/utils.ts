@@ -13,7 +13,6 @@ export const generatePages = (totalPages: number | undefined) => {
 
 export const convertDateFormat = (date: string, isMobile?: boolean) => {
   const newDate = new Date(date);
-  console.log(newDate);
 
   const leftZeroInHours =
     newDate.getHours() - 3 < 10
@@ -30,8 +29,6 @@ export const convertDateFormat = (date: string, isMobile?: boolean) => {
 
   const formattedDate =
     leftZeroInDay + '/' + leftZeroInMonth + '/' + newDate.getFullYear();
-
-  console.log('Criado em: ', formattedDate + 'às' + hours);
 
   if (!isMobile) {
     return `Criado em ${formattedDate} às ${hours}`;

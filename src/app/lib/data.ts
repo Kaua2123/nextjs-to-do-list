@@ -31,7 +31,7 @@ export async function fetchFilteredTasks(query: string, currentPage: number) {
     console.log('fetching task with query: ', query);
 
     const tasks = await pool.query<Task>(
-      `SELECT * FROM TASKS WHERE tasks.name LIKE $1 ORDER BY tasks.name LIMIT 6 OFFSET ($2 - 1) * 6 `,
+      `SELECT * FROM TASKS WHERE tasks.name ILIKE $1 ORDER BY tasks.name LIMIT 6 OFFSET ($2 - 1) * 6 `,
       [`%${query}%`, `${currentPage}`],
     );
 
@@ -49,7 +49,7 @@ export async function fetchTasksPages(query: string) {
     console.log('fetching task with query: ', query);
 
     const result = await pool.query<{ count: string }>( // contar os registros
-      `SELECT COUNT(*) AS count FROM TASKS WHERE tasks."name" LIKE $1`,
+      `SELECT COUNT(*) AS count FROM TASKS WHERE tasks.name ILIKE $1`,
       [`%${query}%`],
     );
 

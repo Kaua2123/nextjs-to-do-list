@@ -16,7 +16,7 @@ export default function Search() {
 
     params.set('page', '1');
     if (query) {
-      params.set('query', query); // setando um parâmetro
+      params.set('query', query.toLowerCase()); // setando um parâmetro
     } else {
       params.delete('query'); // deletando caso não haja nada digitado pelo usuario
     }
