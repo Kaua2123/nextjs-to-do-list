@@ -22,14 +22,14 @@ export function EditTaskForm({ task }: { task: Task[] | undefined }) {
 
   return (
     <form action={formAction}>
-      <div className="bg-gray-50 w-full p-12 rounded-3xl">
+      <div className="bg-gray-50 w-full p-4 md:p-12 rounded-3xl">
         <label htmlFor="" className="block mb-3 mt-12">
           Descrição da tarefa
         </label>
         <div className="relative mt-4  flex items-center">
           <input
             name="description"
-            className="peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
+            className="text-lg md:text-2xl  peer rounded-md p-4 px-20 border border-gray-200 w-full focus:outline-green-600"
             type="text"
             placeholder="Nos dê mais detalhes sobre a tarefa"
             defaultValue={task && task[0].description}
@@ -51,7 +51,7 @@ export function EditTaskForm({ task }: { task: Task[] | undefined }) {
         <label htmlFor="" className="block mb-3 mt-12">
           Status
         </label>
-        <div className="relative mt-4 flex gap-8 items-center">
+        <div className="relative mt-4 flex md:flex-row flex-col gap-8 md:items-center">
           <span
             onClick={() => setStatus('pending')}
             className={clsx(
@@ -104,7 +104,7 @@ export function EditTaskForm({ task }: { task: Task[] | undefined }) {
             defaultValue={task && task[0].tags}
             name="tags"
             style={{ paddingLeft: '4.5rem' }}
-            className="peer rounded-md p-4 border border-gray-200 w-full focus:outline-green-600"
+            className="text-lg md:text-2xl  peer rounded-md p-4 border border-gray-200 w-full focus:outline-green-600"
           >
             <option value="social">Social</option>
             <option value="trabalho">Trabalho</option>
@@ -116,11 +116,11 @@ export function EditTaskForm({ task }: { task: Task[] | undefined }) {
           />
         </div>
       </div>
-      <div className="flex gap-10 mt-20 justify-end">
+      <div className="flex md:flex-row flex-col gap-2 md:gap-10 mt-10 md:mt-20 md:justify-end">
         <Link href="/tasks">
-          <AltButton>Cancelar</AltButton>
+          <AltButton className="md:w-auto w-full">Cancelar</AltButton>
         </Link>
-        <Button className="bg-green-600">Editar tarefa</Button>
+        <Button className="bg-green-600">Atualizar tarefa</Button>
       </div>
     </form>
   );
